@@ -134,7 +134,7 @@ function drawClothes(){
   ctx.fill(); ctx.stroke();
 
   ctx.fillStyle="#fff";
-  ctx.font=`bold ${13*s}px Arial`;
+  ctx.font=`bold ${12*s}px Arial`;
   ctx.textAlign="center"; ctx.textBaseline="middle";
   ctx.fillText("MIZUKI", a.x, a.y);
 }
