@@ -34,7 +34,9 @@ const avatar = {
   scale: s, 
   final: false  // 最終形態で呼吸を開始するフラグ
 };
-const dominant = { color: "#A09BDA" };
+// 服のカラーを茶色に
+const dominant = { color: "#8B4513" }; // 茶色に変更
+
 
 // 素材（棒や蝶）
 let balls = [];
@@ -189,8 +191,9 @@ function draw(){
       const baseX = avatar.x, baseY = avatar.y-110*s;
       const floatOffset = Math.sin(Date.now()*0.003)*8*s;
       const drawY = baseY + floatOffset;
-      ctx.fillStyle = dominant ? dominant.color : "#fff";
-      ctx.strokeStyle = "#000";
+     // ===== 蝶を描く部分 =====
+ctx.fillStyle = dominant ? dominant.color : "#fff"; // 茶色
+ctx.strokeStyle = "#000"; // 輪郭は黒
 
       // 左三角
       ctx.beginPath();
@@ -253,17 +256,21 @@ function draw(){
     }
   });
 
-  // ===== 金粉描画 =====
-  sparkles.forEach((sp,i)=>{
+
+// ===== 金粉（💩マーク）描画 =====
+sparkles.forEach((sp,i)=>{
     ctx.globalAlpha=sp.alpha;
-    ctx.fillStyle="gold";
-    drawStar(ctx, sp.x, sp.y, sp.size, 5, 0.5);
+    ctx.fillStyle="gold"; // 金色
+    ctx.font = `${sp.size*2}px serif`; // サイズ調整
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText("💩", sp.x, sp.y); // 絵文字で描画
     ctx.globalAlpha=1;
 
     sp.x+=sp.vx; sp.y+=sp.vy;
     sp.life-=1/60; sp.alpha=sp.life/10;
     if(sp.life<=0) sparkles.splice(i,1);
-  });
+});
 
   // ===== メッセージ =====
   if(messageVisible && sparkles.length > 0){
