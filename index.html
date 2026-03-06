@@ -210,11 +210,17 @@ function draw(){
 
       if(!ball.absorbed){ ball.x=baseX; ball.y=drawY; }
     }
-    else{
-      // ステージ2以降の丸素材
-      ctx.rect(ball.x-ball.r, ball.y-ball.r, ball.r*2, ball.r*2);
-      ctx.stroke();
-    }
+    else {
+  // ステージ2: 📖絵文字
+  ctx.font = `${ball.r * 2}px serif`; // サイズを四角形の幅に合わせる（調整可能）
+  ctx.textAlign = "center"; // 横中央揃え
+  ctx.textBaseline = "middle"; // 縦中央揃え
+  ctx.fillStyle = "#000"; // 絵文字の色（任意で変更可、例: dominant.colorに合わせる）
+  ctx.fillText("📖", ball.x, ball.y); // 絵文字を描画
+  // 必要に応じて輪郭を追加（元のストローク相当）
+  ctx.strokeStyle = "#000";
+  ctx.strokeText("📖", ball.x, ball.y);
+}
 
     // ===== 吸収判定 =====
     const dx = avatar.x-ball.x, dy=avatar.y-ball.y;
@@ -267,7 +273,7 @@ function draw(){
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
 
-    ctx.fillText("🎓合格おめでとう🎊", w/2, h/2 - 80*s);
+    ctx.fillText("合格おめでとう", w/2, h/2 - 80*s);
 
   }
 
